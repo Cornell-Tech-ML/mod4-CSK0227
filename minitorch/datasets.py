@@ -5,6 +5,19 @@ from typing import List, Tuple
 
 
 def make_pts(N: int) -> List[Tuple[float, float]]:
+    """Generate N random 2D points.
+
+    Each point's coordinates are randomly chosen from [0, 1).
+
+    Args:
+    ----
+        N (int): Number of points to generate.
+
+    Returns:
+    -------
+        List[Tuple[float, float]]: List of N 2D points.
+
+    """
     X = []
     for i in range(N):
         x_1 = random.random()
@@ -21,6 +34,20 @@ class Graph:
 
 
 def simple(N: int) -> Graph:
+    """Generate a simple dataset with N points.
+
+    Creates N 2D points and labels them based on the x-coordinate:
+    1 if x < 0.5, else 0.
+
+    Args:
+    ----
+        N (int): Number of data points to generate.
+
+    Returns:
+    -------
+        Graph: Contains N points and their labels.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -30,6 +57,20 @@ def simple(N: int) -> Graph:
 
 
 def diag(N: int) -> Graph:
+    """Generate a diagonal dataset with N points.
+
+    Creates N 2D points and labels them based on their position relative to the line x + y = 0.5:
+    1 if x + y < 0.5, else 0.
+
+    Args:
+    ----
+        N (int): Number of data points to generate.
+
+    Returns:
+    -------
+        Graph: Contains N points and their diagonal labels.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -39,6 +80,20 @@ def diag(N: int) -> Graph:
 
 
 def split(N: int) -> Graph:
+    """Generate a split dataset with N points.
+
+    Creates N 2D points and labels them based on the x-coordinate:
+    1 if x < 0.2 or x > 0.8, else 0.
+
+    Args:
+    ----
+        N (int): Number of data points to generate.
+
+    Returns:
+    -------
+        Graph: Contains N points and their split labels.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -48,6 +103,20 @@ def split(N: int) -> Graph:
 
 
 def xor(N: int) -> Graph:
+    """Generate a dataset for the XOR problem.
+
+    Creates N 2D points and labels them according to XOR logic:
+    1 if exactly one coordinate > 0.5, else 0.
+
+    Args:
+    ----
+        N (int): Number of data points to generate.
+
+    Returns:
+    -------
+        Graph: Contains N points and their XOR labels.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -57,6 +126,20 @@ def xor(N: int) -> Graph:
 
 
 def circle(N: int) -> Graph:
+    """Generate a circular dataset with N points.
+
+    Creates N 2D points and labels them based on their distance from (0.5, 0.5):
+    1 if the point is outside a circle with radius sqrt(0.1) centered at (0.5, 0.5), else 0.
+
+    Args:
+    ----
+        N (int): Number of data points to generate.
+
+    Returns:
+    -------
+        Graph: Contains N points and their circular boundary labels.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -67,6 +150,27 @@ def circle(N: int) -> Graph:
 
 
 def spiral(N: int) -> Graph:
+    """Generate a spiral dataset with N points.
+
+    Creates two intertwined spirals, each with N/2 points:
+    - One spiral starts at the center and moves outward clockwise
+    - The other spiral starts at the center and moves outward counterclockwise
+    Points on the first spiral are labeled 0, and points on the second are labeled 1.
+
+    Args:
+    ----
+        N (int): Total number of data points to generate (should be even).
+
+    Returns:
+    -------
+        Graph: Contains N points arranged in two spirals and their labels (0 or 1).
+
+    Note:
+    ----
+        The spirals are centered at (0.5, 0.5) and scaled to fit within the unit square.
+
+    """
+
     def x(t: float) -> float:
         return t * math.cos(t) / 20.0
 
